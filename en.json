@@ -1,0 +1,15 @@
+{
+  "Name": "Twitch Watcher",
+  "Category": "Krabs - Stream Deck Labs",
+  "Description": "No login or account access required! Add your favorite Twitch streamers. When live, the button will show their live view thumbnail preview (updates every few minutes). When offline, the button will show their Twitch profile image greyed out. Pressing the button will take you to their Twitch page.",
+
+    "com.krabs.twitchwatcher.twitchwatcher":
+    {
+        "Name": "Twitch Watcher",
+        "Tooltip": "Twitch Watcher"
+    },
+    "Localization": {
+      "Configuration": "Configuration",
+      "Twitch Channel Name": "Twitch Channel Name"
+    }
+}

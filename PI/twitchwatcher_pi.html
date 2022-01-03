@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui,viewport-fit=cover">
+        <meta name=apple-mobile-web-app-capable content=yes>
+        <meta name=apple-mobile-web-app-status-bar-style content=black>
+        <title>Twitch Watcher</title>
+        <link rel="stylesheet" href="../resources/css/sdpi.css">
+    </head>
+    <body>
+        <div class="sdpi-wrapper">
+          <div class="sdpi-item">
+              <details class="message caution">
+              <summary>Do NOT use the image area on the left. It will interfere with this plugin.</summary>
+              </details>
+          </div>
+          <div class="sdpi-heading">Configuration</div>
+          <div class="sdpi-item">
+             <div class="sdpi-item-label">Twitch Channel Name</div>
+             <input id="vKrabs_ChannelName" class="sdpi-item-value" type="text"
+                placeholder="Twitch Channel Name" value="" required />
+          </div>
+
+          <div class="sdpi-heading"></div>
+          <div class="sdpi-item">
+              <details class="message info">
+              <summary onclick="SDApi.common.openUrl('', 'https://www.krabs.me/streamdeck-plugins')">For more information or support go to click here: <a href="#">https://www.krabs.me/streamdeck-plugins</a></summary>
+              </details>
+          </div>
+        </div>
+
+        <div class="sdpi-info-label hidden" style="top: -1000;" value=""></div>
+        <script src="../resources/scripts/common.js"></script>
+        <script src="../resources/scripts/common_pi.js"></script>
+        <script src="../resources/scripts/index_pi.js"></script>
+    </body>
+    </html>
