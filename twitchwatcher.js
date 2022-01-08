@@ -106,10 +106,9 @@ const twitchwatcher = {
     },
 
     onKeyUp: function (jsn) {
-        if (!this.settings || !this.settings[jsn.context].vKrabs_DiscordWebHook) {
-          $SD.api.showAlert(jsn.context);
-          return;
-        }
+      if (!this.settings) this.settings={};
+      $SD.api.getSettings(jsn.context);
+      this.settings[jsn.context] = Utils.getProp(jsn, 'payload.settings', {});
 
         SDApi.common.openUrl('', 'https://www.twitch.tv/' + this.settings[jsn.context].vKrabs_ChannelName)
 
