@@ -21,11 +21,11 @@ const twitchwatcher = {
     settings:{},
     onDidReceiveSettings: function(jsn) {
         this.settings[jsn.context] = Utils.getProp(jsn, 'payload.settings', {});
-        var vImageURL = "https://static-cdn.jtvnw.net/previews-ttv/live_user_" + this.settings[jsn.context].vKrabs_ChannelName + "-348x261.jpg";
+        var vImageURL = "https://static-cdn.jtvnw.net/previews-ttv/live_user_" + this.settings[jsn.context].vKrabs_ChannelName.toLowerCase() + "-348x261.jpg";
         let vSelf = this
         function UpdateTwitchImage() {
           vSelf.settings[jsn.context] = Utils.getProp(jsn, 'payload.settings', {});
-          vImageURL = "https://static-cdn.jtvnw.net/previews-ttv/live_user_" + vSelf.settings[jsn.context].vKrabs_ChannelName + "-348x261.jpg";
+          vImageURL = "https://static-cdn.jtvnw.net/previews-ttv/live_user_" + vSelf.settings[jsn.context].vKrabs_ChannelName.toLowerCase() + "-348x261.jpg";
           var vResponseURL;
           var xhr = new XMLHttpRequest();
           xhr.open('GET', vImageURL, true);
@@ -36,7 +36,7 @@ const twitchwatcher = {
           xhr.send(null);
           function fGetResponseURL() {
             if (vResponseURL == "https://static-cdn.jtvnw.net/ttv-static/404_preview-348x261.jpg") {
-              vImageURL = "https://avatar.glue-bot.xyz/twitch/" + vSelf.settings[jsn.context].vKrabs_ChannelName;
+              vImageURL = "https://avatar.glue-bot.xyz/twitch/" + vSelf.settings[jsn.context].vKrabs_ChannelName.toLowerCase();
               var vFilter = 'opacity(.37) grayscale(.85)';
               vOverlay = vOverlay_TwitchLogo
               Utils.getDataUriWithOverlay(vImageURL, function(base64Img){
@@ -44,7 +44,7 @@ const twitchwatcher = {
               $SD.api.setImage(jsn.context, vImageBase64);
             }, undefined, undefined, vOverlay, vFilter);
             } else {
-              vImageURL = "https://static-cdn.jtvnw.net/previews-ttv/live_user_" + vSelf.settings[jsn.context].vKrabs_ChannelName + "-348x261.jpg";
+              vImageURL = "https://static-cdn.jtvnw.net/previews-ttv/live_user_" + vSelf.settings[jsn.context].vKrabs_ChannelName.toLowerCase() + "-348x261.jpg";
               vOverlay = vOverlay_TwitchLogo
               Utils.getDataUriWithOverlay(vImageURL, function(base64Img){
               var vImageBase64 = base64Img;
@@ -75,7 +75,7 @@ const twitchwatcher = {
         if (!this.settings) this.settings={};
         $SD.api.getSettings(jsn.context);
         this.settings[jsn.context] = Utils.getProp(jsn, 'payload.settings', {});
-        let vImageURL = "https://static-cdn.jtvnw.net/previews-ttv/live_user_" + this.settings[jsn.context].vKrabs_ChannelName + "-348x261.jpg";
+        let vImageURL = "https://static-cdn.jtvnw.net/previews-ttv/live_user_" + this.settings[jsn.context].vKrabs_ChannelName.toLowerCase() + "-348x261.jpg";
         var vResponseURL;
         var xhr = new XMLHttpRequest();
         xhr.open('GET', vImageURL, true);
@@ -87,7 +87,7 @@ const twitchwatcher = {
         let vSelf = this
         function fGetResponseURL() {
           if (vResponseURL == "https://static-cdn.jtvnw.net/ttv-static/404_preview-348x261.jpg") {
-            vImageURL = "https://avatar.glue-bot.xyz/twitch/" + vSelf.settings[jsn.context].vKrabs_ChannelName;
+            vImageURL = "https://avatar.glue-bot.xyz/twitch/" + vSelf.settings[jsn.context].vKrabs_ChannelName.toLowerCase();
             var vFilter = 'opacity(.37) grayscale(.85)';
             vOverlay = vOverlay_TwitchLogo
             Utils.getDataUriWithOverlay(vImageURL, function(base64Img){
@@ -95,7 +95,7 @@ const twitchwatcher = {
             $SD.api.setImage(jsn.context, vImageBase64);
           }, undefined, undefined, vOverlay, vFilter);
           } else {
-            vImageURL = "https://static-cdn.jtvnw.net/previews-ttv/live_user_" + vSelf.settings[jsn.context].vKrabs_ChannelName + "-348x261.jpg";
+            vImageURL = "https://static-cdn.jtvnw.net/previews-ttv/live_user_" + vSelf.settings[jsn.context].vKrabs_ChannelName.toLowerCase() + "-348x261.jpg";
             vOverlay = vOverlay_TwitchLogo
             Utils.getDataUriWithOverlay(vImageURL, function(base64Img){
             var vImageBase64 = base64Img;
@@ -110,7 +110,7 @@ const twitchwatcher = {
       $SD.api.getSettings(jsn.context);
       this.settings[jsn.context] = Utils.getProp(jsn, 'payload.settings', {});
 
-        SDApi.common.openUrl('', 'https://www.twitch.tv/' + this.settings[jsn.context].vKrabs_ChannelName)
+        SDApi.common.openUrl('', 'https://www.twitch.tv/' + this.settings[jsn.context].vKrabs_ChannelName.toLowerCase())
 
       $.ajaxSetup({
         contentType: "application/json; charset=utf-8",
