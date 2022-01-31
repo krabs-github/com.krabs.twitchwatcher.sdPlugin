@@ -24,8 +24,8 @@ const twitchwatcher = {
         var vImageURL = "https://static-cdn.jtvnw.net/previews-ttv/live_user_" + this.settings[jsn.context].vKrabs_ChannelName.toLowerCase() + "-348x261.jpg";
         let vSelf = this
         function TwitchGetProfile() {
-          let vKrabs_ClientId = "zoy9jkm6fbvgwt4ail0vwwt4f6kn3z";
-          let vKrabs_ClientSecret = "v4qdk9s8a0u8hpfszjbwionsbzlkna";
+          let vKrabs_ClientId = "6v4gfnmckfgc4ld3751ykf9t4nboxj";
+          let vKrabs_ClientSecret = "2zg6lziwq98bnm5iqtgzx0chjbkk3r";
           vSelf.settings[jsn.context] = Utils.getProp(jsn, 'payload.settings', {});
             function getTwitchAuthorization() {
                 let url = `https://id.twitch.tv/oauth2/token?client_id=${vKrabs_ClientId}&client_secret=${vKrabs_ClientSecret}&grant_type=client_credentials`;
