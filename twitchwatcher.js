@@ -23,6 +23,51 @@ const twitchwatcher = {
         this.settings[jsn.context] = Utils.getProp(jsn, 'payload.settings', {});
         var vImageURL = "https://static-cdn.jtvnw.net/previews-ttv/live_user_" + this.settings[jsn.context].vKrabs_ChannelName.toLowerCase() + "-348x261.jpg";
         let vSelf = this
+        function TwitchGetProfile() {
+          let vKrabs_ClientId = "zoy9jkm6fbvgwt4ail0vwwt4f6kn3z";
+          let vKrabs_ClientSecret = "v4qdk9s8a0u8hpfszjbwionsbzlkna";
+          vSelf.settings[jsn.context] = Utils.getProp(jsn, 'payload.settings', {});
+            function getTwitchAuthorization() {
+                let url = `https://id.twitch.tv/oauth2/token?client_id=${vKrabs_ClientId}&client_secret=${vKrabs_ClientSecret}&grant_type=client_credentials`;
+                return fetch(url, {
+                method: "POST",
+                })
+                .then((res) => res.json())
+                .then((data) => {
+                    return data;
+                });
+            }
+            async function getProfile() {
+                const endpoint = "https://api.twitch.tv/helix/users?login=" + vSelf.settings[jsn.context].vKrabs_ChannelName.toLowerCase();
+
+                let authorizationObject = await getTwitchAuthorization();
+                let { access_token, expires_in, token_type } = authorizationObject;
+                //token_type first letter must be uppercase
+                token_type =
+                token_type.substring(0, 1).toUpperCase() +
+                token_type.substring(1, token_type.length);
+                let authorization = `${token_type} ${access_token}`;
+                let headers = {
+                authorization,
+                "Client-Id": vKrabs_ClientId,
+                };
+                fetch(endpoint, {
+                headers,
+                })
+                .then((res) => res.json())
+                .then((data) => renderStreams(data));
+            }
+            function renderStreams(data) {
+              let vImageURL = data.data[0].profile_image_url;
+              var vFilter = 'opacity(.37) grayscale(.85)';
+              vOverlay = vOverlay_TwitchLogo
+              Utils.getDataUriWithOverlay(vImageURL, function(base64Img){
+              var vImageBase64 = base64Img;
+              $SD.api.setImage(jsn.context, vImageBase64);
+              }, undefined, undefined, vOverlay, vFilter);
+            }
+          getProfile();
+        }
         function UpdateTwitchImage() {
           vSelf.settings[jsn.context] = Utils.getProp(jsn, 'payload.settings', {});
           vImageURL = "https://static-cdn.jtvnw.net/previews-ttv/live_user_" + vSelf.settings[jsn.context].vKrabs_ChannelName.toLowerCase() + "-348x261.jpg";
@@ -36,13 +81,7 @@ const twitchwatcher = {
           xhr.send(null);
           function fGetResponseURL() {
             if (vResponseURL == "https://static-cdn.jtvnw.net/ttv-static/404_preview-348x261.jpg") {
-              vImageURL = "https://avatar.glue-bot.xyz/twitch/" + vSelf.settings[jsn.context].vKrabs_ChannelName.toLowerCase();
-              var vFilter = 'opacity(.37) grayscale(.85)';
-              vOverlay = vOverlay_TwitchLogo
-              Utils.getDataUriWithOverlay(vImageURL, function(base64Img){
-              var vImageBase64 = base64Img;
-              $SD.api.setImage(jsn.context, vImageBase64);
-            }, undefined, undefined, vOverlay, vFilter);
+              TwitchGetProfile();
             } else {
               vImageURL = "https://static-cdn.jtvnw.net/previews-ttv/live_user_" + vSelf.settings[jsn.context].vKrabs_ChannelName.toLowerCase() + "-348x261.jpg";
               vOverlay = vOverlay_TwitchLogo
@@ -87,13 +126,7 @@ const twitchwatcher = {
         let vSelf = this
         function fGetResponseURL() {
           if (vResponseURL == "https://static-cdn.jtvnw.net/ttv-static/404_preview-348x261.jpg") {
-            vImageURL = "https://avatar.glue-bot.xyz/twitch/" + vSelf.settings[jsn.context].vKrabs_ChannelName.toLowerCase();
-            var vFilter = 'opacity(.37) grayscale(.85)';
-            vOverlay = vOverlay_TwitchLogo
-            Utils.getDataUriWithOverlay(vImageURL, function(base64Img){
-            var vImageBase64 = base64Img;
-            $SD.api.setImage(jsn.context, vImageBase64);
-          }, undefined, undefined, vOverlay, vFilter);
+            TwitchGetProfile();
           } else {
             vImageURL = "https://static-cdn.jtvnw.net/previews-ttv/live_user_" + vSelf.settings[jsn.context].vKrabs_ChannelName.toLowerCase() + "-348x261.jpg";
             vOverlay = vOverlay_TwitchLogo
