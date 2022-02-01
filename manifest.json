@@ -29,7 +29,7 @@
     "Name": "Twitch Watcher",
     "Icon": "resources/images/pluginIcon",
     "URL": "https://www.krabs.me/streamdeck-plugins",
-    "Version": "1.0.5",
+    "Version": "1.0.6",
     "OS": [
         { "Platform": "windows", "MinimumVersion": "10" },
         { "Platform": "mac", "MinimumVersion": "10.11" }
